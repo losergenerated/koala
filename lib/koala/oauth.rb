@@ -225,6 +225,7 @@ module Koala
       #
       # @return a hash of the validated request information
       def parse_signed_request(input)
+        raise OAuthSignatureError, 'Invalid (incomplete) signature data' if input.blank?
         encoded_sig, encoded_envelope = input.split('.', 2)
         raise OAuthSignatureError, 'Invalid (incomplete) signature data' unless encoded_sig && encoded_envelope
 
